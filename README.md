@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Gowthamarajan P — Developer Portfolio
 
 A production-ready developer portfolio built with Next.js 15 (App Router), React 19,
@@ -148,3 +149,6 @@ docker run -p 3000:3000 portfolio
 - [ ] Project gallery screenshots + lightbox
 - [ ] Command palette (⌘K) for quick navigation
 - [ ] Real email delivery for the contact form
+=======
+# Gowthamarajan-portfolio
+>>>>>>> 95ca1036c6b13926f7813f49bccd2a0a55dde553
