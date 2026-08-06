@@ -1,0 +1,221 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------- */
+/* Design tokens                                                     */
+/* Signature palette: "signal" — a near-black substrate with a cyan  */
+/* trace accent, evoking an oscilloscope / PCB trace. Dark is default.*/
+/* ---------------------------------------------------------------- */
+
+:root {
+  --radius: 1rem;
+
+  --background: 250 20% 99%;
+  --surface: 0 0% 100%;
+  --surface-elevated: 240 20% 97%;
+  --foreground: 222 30% 8%;
+  --muted-foreground: 220 9% 42%;
+
+  --primary: 231 78% 62%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 262 70% 63%;
+  --accent: 189 85% 45%;
+  --accent-foreground: 0 0% 100%;
+
+  --success: 158 64% 40%;
+  --danger: 0 74% 55%;
+  --warning: 38 92% 45%;
+
+  --border: 220 20% 88%;
+  --ring: 231 78% 62%;
+
+  --trace: 189 85% 45%;
+}
+
+.dark {
+  --background: 224 24% 5%;
+  --surface: 222 22% 8%;
+  --surface-elevated: 222 20% 11%;
+  --foreground: 210 20% 96%;
+  --muted-foreground: 217 12% 62%;
+
+  --primary: 231 90% 70%;
+  --primary-foreground: 224 24% 5%;
+  --secondary: 262 83% 74%;
+  --accent: 189 94% 55%;
+  --accent-foreground: 224 24% 5%;
+
+  --success: 158 64% 52%;
+  --danger: 0 84% 65%;
+  --warning: 38 92% 58%;
+
+  --border: 220 20% 18%;
+  --ring: 189 94% 55%;
+
+  --trace: 189 94% 60%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-surface: hsl(var(--surface));
+  --color-surface-elevated: hsl(var(--surface-elevated));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-danger: hsl(var(--danger));
+  --color-warning: hsl(var(--warning));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-trace: hsl(var(--trace));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 0.4rem);
+  --radius-sm: calc(var(--radius) - 0.6rem);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-trace: trace 2.6s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes trace {
+  0%, 100% { stroke-dashoffset: 0; }
+  50% { stroke-dashoffset: -24; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.28);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .glass {
+    background: hsl(var(--surface) / 0.6);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid hsl(var(--border) / 0.7);
+  }
+
+  .glass-elevated {
+    background: hsl(var(--surface-elevated) / 0.72);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid hsl(var(--border) / 0.8);
+  }
+
+  .mesh-gradient {
+    background-image:
+      radial-gradient(38% 38% at 15% 20%, hsl(var(--primary) / 0.22), transparent 70%),
+      radial-gradient(32% 32% at 85% 15%, hsl(var(--secondary) / 0.18), transparent 70%),
+      radial-gradient(45% 45% at 50% 100%, hsl(var(--accent) / 0.14), transparent 70%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(120deg, hsl(var(--foreground)), hsl(var(--primary)) 55%, hsl(var(--accent)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+
+  .card-shadow {
+    box-shadow:
+      0 1px 2px hsl(220 40% 2% / 0.06),
+      0 8px 24px -8px hsl(220 40% 2% / 0.18),
+      0 24px 48px -24px hsl(220 40% 2% / 0.28);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
